@@ -1,14 +1,26 @@
 from pymongo import MongoClient
+from flask import current_app
+
+class UserModel():
 
 
-class User():
+    def __init__(self,*args,**kwargs):
+        mongo_url = current_app.config['MONGO_URL']
+        self._mongo =  MongoClient(mongo_url)
 
-    def getUser(self,username):
+
+    @staticmethod
+    def getUser(username):
         '''
-        get user from mongodb by username
+        get userView from mongodb by username
         :param username:
         :return:
         '''
         user = {'name':'fengguangke',
                 'password':'xx'}
         return user
+
+    def insert(self,user):
+        #TODO INSERT USER INGO DB
+        pass
+

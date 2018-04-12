@@ -1,5 +1,5 @@
 
-class Register():
+class RegisterModel():
     pass
 
 
