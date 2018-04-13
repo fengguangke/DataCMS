@@ -1,2 +1,2 @@
-from .user import UserModel
-from .register import RegisterModel
+from .userModel import UserModel
+from .registerModel import RegisterModel

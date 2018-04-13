@@ -1,9 +1,8 @@
+# -*- coding: utf-8 -*-
 from flask import Flask
 from flask_restful import Resource,Api,reqparse
-from ..models import RegisterModel
-
-app = Flask(__name__)
-api = Api(app)
+# from ..models import UserModel
+from models import UserModel
 
 parser = reqparse.RequestParser()
 parser.add_argument('name',type='str',location='json',required=True)

@@ -1,2 +1,2 @@
-from view import Register
+from view import RegisterView
 

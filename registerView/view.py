@@ -9,7 +9,7 @@ parser.add_argument('name',type=str,location='json',required=True)
 parser.add_argument('password',type=str,location='json',required=True)
 
 
-class Register(Resource):
+class RegisterView(Resource):
 
         def post(self):
             register_data = parser.parse_args()
@@ -19,7 +19,7 @@ class Register(Resource):
             if not user:
                 user = UserModel(username=name,password=password,realname='',age=0,sex='',phone='',address='',email='',qq='',avatar='')
                 UserModel.insert(user)
-                return {'code':200,'msg':u'注册用户成功'}
+                return {'code':200,'msg':u'注册用户成功','user':user}
             else:
                 return {'code':'1001','error':u'用户名已存在'},400
 
