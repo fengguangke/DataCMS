@@ -20,19 +20,19 @@ class UserModel():
     '''
 
     def __init__(self,*args,**kwargs):
+        collection = 'CMSData_user'
         mongo_url = current_app.config['MONGO_URL']
-        self._mongo =  MongoClient(mongo_url)
+        mongo = MongoClient(mongo_url)
+        db = mongo.get_database(current_app.config['MONGO_DB'])
+        self.collection = db.get_collection(collection)
 
-    @staticmethod
-    def getUser(username):
+    def getUser(self,username):
         '''
         get user from mongodb by username
         :param username:
         :return:
         '''
-        # todo get a user from db
-        user = {'name':'fengguangke',
-                'password':'xx'}
+        user = self.collection.find_one({'username':username})
         return user
 
     def insert(self,user):
@@ -42,8 +42,8 @@ class UserModel():
         user structure {name}
         :return:
         '''
-        #TODO INSERT USER INGO DB
-        pass
+
+        self.collection.insert_one(user)
 
     def verify_password(self,username,password):
         # todo verify user's password
