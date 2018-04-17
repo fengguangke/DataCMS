@@ -7,6 +7,8 @@ from registerView import RegisterView
 from userView import UserView
 
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
+
 api = Api(app)
 
 # register 'Register' Resource
