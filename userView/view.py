@@ -2,6 +2,7 @@
 
 from models import UserModel
 from flask_restful import Resource,reqparse
+from models import UserModel
 
 parse = reqparse.RequestParser()
 parse.add_argument('username',type=str,location='json',required=False)
@@ -22,8 +23,12 @@ class UserView(Resource):
         :param user_id:
         :return: user
         '''
-        pass
-        # todo
+        userModel = UserModel()
+        user = userModel.getUserById(user_id)
+        if user:
+            return {'code':200,'msg':u'获取用户信息成功','user':user}
+        else:
+            return {'code':1002,'error':u'获取用户信息失败'},400
 
     def post(self,user_id):
         '''

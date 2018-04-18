@@ -26,6 +26,11 @@ class UserModel():
         db = mongo.get_database(current_app.config['MONGO_DB'])
         self.collection = db.get_collection(collection)
 
+    def getUserById(self,user_id):
+
+        user = self.collection.find_one({"_id":user_id},projection={'_id': False})
+        return user
+
     def getUser(self,username):
         '''
         get user from mongodb by username
@@ -42,7 +47,6 @@ class UserModel():
         user structure {name}
         :return:
         '''
-
         self.collection.insert_one(user)
 
     def verify_password(self,username,password):
