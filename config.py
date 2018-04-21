@@ -1,4 +1,4 @@
 MONGO_URL = 'mongodb://127.0.0.1:27017'
 MONGO_DB = 'CMSData'
-
-
+SECRET_KEY = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+JSON_AS_ASCII = False
