@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from pymongo import MongoClient
+from bson import ObjectId
 from flask import current_app
 
 class UserModel():
@@ -28,7 +29,7 @@ class UserModel():
 
     def getUserById(self,user_id):
 
-        user = self.collection.find_one({"_id":user_id},projection={'_id': False})
+        user = self.collection.find_one({"_id":ObjectId(user_id)},projection={'_id': False})
         return user
 
     def getUser(self,username):
@@ -53,11 +54,36 @@ class UserModel():
         # todo verify user's password
         pass
 
-    def update(self,user):
+    def update(self,user_id,user_info):
         '''
         update user
-        :param user:
+        :param user_id:
+        :param user_info:
         :return:user
         '''
-        # todo update user
 
+        result = self.collection.find_one_and_update({'_id':ObjectId(user_id)},
+                                            {"$set":{'username':user_info['username'],
+                                                     'realName':user_info['realName'],
+                                                     'age':user_info['age'],
+                                                     'sex':user_info['sex'],
+                                                     'phone':user_info['phone'],
+                                                     'address':user_info['address'],
+                                                     'email':user_info['email'],
+                                                     'qq':user_info['qq'],
+                                                     'avatar':user_info['avatar']
+                                                     }})
+        if result:
+            return True
+        return False
+
+    def deleteUserById(self,user_id):
+        '''
+        delete user bu user_id
+        :return:
+        '''
+
+        result = self.collection.find_one_and_delete({'_id':ObjectId(user_id)})
+        if result:
+            return True
+        return False
