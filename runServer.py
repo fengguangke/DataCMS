@@ -15,7 +15,8 @@ api = Api(app)
 # register 'Register' Resource
 api.add_resource(RegisterView,'/register',endpoint='register')
 api.add_resource(UserView,'/user','/user/<user_id>',endpoint='user')
-api.add_resource(LoginView,'/login',endpoint='login')
+api.add_resource(LoginView,'/login','/logout',endpoint='login_logout')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
