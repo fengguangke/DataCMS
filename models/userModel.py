@@ -30,16 +30,26 @@ class UserModel():
     def getUserById(self,user_id):
 
         user = self.collection.find_one({"_id":ObjectId(user_id)},projection={'_id': False})
+        print(user)
         return user
 
-    def getUser(self,username):
+    def getUser(self, username):
         '''
         get user from mongodb by username
         :param username:
         :return:
         '''
-        user = self.collection.find_one({'username':username})
+        user = self.collection.find_one({'username': username})
         return user
+
+    def getUserIdByName(self,username):
+        '''
+        get user from mongodb by username
+        :param username:
+        :return:
+        '''
+        user_Id = self.collection.find_one({'username':username},projection=['_id'])
+        return str(user_Id['_id'])
 
     def insert(self,user):
         '''
