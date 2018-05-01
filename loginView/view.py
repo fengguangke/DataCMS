@@ -23,7 +23,7 @@ class LoginView(Resource):
             password = register_data['password']
             user = userModel.getUser(username=name)
             if user and user['password'] == password:
-                session['user'] = name
+                session['currentUser'] = name
                 response = make_response(jsonify({'code':200,'msg':u'登录成功'}))
                 response.set_cookie("token",name)
                 response.headers['Content-Type'] = 'application/json'
@@ -38,7 +38,7 @@ class LoginView(Resource):
             logout
             :return:
             '''
-            user_session = session.pop('user',None)
+            user_session = session.pop('currentUser',None)
             response = make_response(jsonify({'code':200,'msg':u'退出登录成功!'}))
             response.delete_cookie('token')
             response.headers['Content-Type'] = 'application/json'
