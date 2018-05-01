@@ -30,7 +30,6 @@ class UserModel():
     def getUserById(self,user_id):
 
         user = self.collection.find_one({"_id":ObjectId(user_id)},projection={'_id': False})
-        print(user)
         return user
 
     def getUser(self, username):
